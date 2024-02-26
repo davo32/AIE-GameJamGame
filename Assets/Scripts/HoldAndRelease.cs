@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HoldAndRelease : MonoBehaviour
 {
     [SerializeField] private float jumpForce = 10.0f;
     [SerializeField] private float maxJumpForce = 20.0f;
     [SerializeField] private float jumpTime = 1.0f; //Time to reach max jump force
+    [SerializeField] private Slider powerBar;
 
     private float currentJumpForce = 0.0f;
     [HideInInspector]
@@ -14,6 +16,7 @@ public class HoldAndRelease : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        powerBar.maxValue = maxJumpForce;
     }
 
     private void Update()
@@ -36,6 +39,7 @@ public class HoldAndRelease : MonoBehaviour
             rb.AddForce(Vector2.up * currentJumpForce, ForceMode.Impulse);
             isJumping = false;
         }
+        powerBar.value = currentJumpForce;
     }
 
 
